@@ -22,7 +22,6 @@
 
 CWD=`pwd`
 PROGNAME="setup-environment"
-PACKAGE_CLASSES=${PACKAGE_CLASSES:-package_rpm}
 
 usage()
 {
@@ -44,13 +43,9 @@ directory <build-dir>. The build directory configuration is unchanged.
 "
 
     ls sources/*/conf/machine/*.conf > /dev/null 2>&1
-    ls sources/meta-freescale-distro/conf/distro/fslc-*.conf > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo -e "
 Supported machines: `echo; ls sources/*/conf/machine/*.conf \
-| sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%"`
-
-Supported Freescale's distros: `echo; ls sources/meta-freescale-distro/conf/distro/fslc-*.conf \
 | sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%"`
 
 Available Poky's distros: `echo; ls sources/poky/meta-poky/conf/distro/*.conf \
@@ -59,7 +54,7 @@ Available Poky's distros: `echo; ls sources/poky/meta-poky/conf/distro/*.conf \
 Examples:
 
 - To create a new Yocto build directory:
-  $ MACHINE=imx6qdlsabresd DISTRO=fslc-framebuffer source $PROGNAME build
+  $ MACHINE=beaglebone DISTRO=poky source $PROGNAME build
 
 - To use an existing Yocto build directory:
   $ source $PROGNAME build
@@ -121,7 +116,7 @@ if [ "$build_dir_setup_enabled" = "true" ] && [ -z "$MACHINE" ]; then
 fi
 
 if [ -z "$SDKMACHINE" ]; then
-    SDKMACHINE='i686'
+    SDKMACHINE='x86_64'
 fi
 
 if [ "$build_dir_setup_enabled" = "true" ] && [ -z "$DISTRO" ]; then
@@ -153,17 +148,16 @@ if [ "$build_dir_setup_enabled" = "true" ]; then
 
     # Generate the local.conf based on the Yocto defaults
     TEMPLATES=$CWD/sources/base/conf 
-    grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
-    cat >> conf/local.conf <<EOF
+#    grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
+#    cat >> conf/local.conf <<EOF
 
-DL_DIR ?= "\${BSPDIR}/downloads/"
-EOF
+#DL_DIR ?= "\${BSPDIR}/downloads/"
+#EOF
     # Change settings according environment
-    sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
-        -e "s,SDKMACHINE ??=.*,SDKMACHINE ??= '$SDKMACHINE',g" \
-        -e "s,DISTRO ?=.*,DISTRO ?= '$DISTRO',g" \
-        -e "s,PACKAGE_CLASSES ?=.*,PACKAGE_CLASSES ?= '$PACKAGE_CLASSES',g" \
-        -i conf/local.conf
+#    sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
+#        -e "s,SDKMACHINE ??=.*,SDKMACHINE ??= '$SDKMACHINE',g" \
+#        -e "s,DISTRO ?=.*,DISTRO ?= '$DISTRO',g" \
+#        -i conf/local.conf
 
     cp $TEMPLATES/* conf/
 
