@@ -38,22 +38,12 @@ The following layers are included on this release:
    Mailing list: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
    Note: Use [meta-oe] in subject to easy the processing
 
- * meta-freescale: support for Freescale's processors and board
-   Path: sources/meta-freescale
-   Project: https://github.com/Freescale/meta-freescale
-   GIT: git://github.com/Freescale/meta-freescale.git
-   Mailing list: https://lists.yoctoproject.org/listinfo/meta-freescale
+ * meta-mediatek: support for meditek's processors and board
+   Path: sources/meta-mediatek
+   Project: https://gitlab.com/wtolkien/meta-mediatek
+   GIT: https://gitlab.com/wtolkien/meta-mediatek.git
 
- * meta-freescale-3rdparty: support for boards using Freescale's processors
-   Path: sources/meta-freescale-3rdparty
-   Project: https://github.com/Freescale/meta-freescale-3rdparty
-   GIT: git://github.com/Freescale/meta-freescale-3rdparty.git
-   Mailing list: https://lists.yoctoproject.org/listinfo/meta-freescale
-   Note: Use [3rdparty] in subject to easy the processing
-
- * meta-freescale-distro: distribution images and recipes
-   Path: sources/meta-freescale-distro
-   Project: https://github.com/Freescale/meta-freescale-distro
-   GIT: git://github.com/Freescale/meta-freescale-distro.git
-   Mailing list: https://lists.yoctoproject.org/listinfo/meta-freescale
-   Note: Use [distro] in subject to easy the processing
+ * meta-swupdate: support for boards using Freescale's processors
+   Path: sources/meta-swupdate
+   Project: https://github.com/sbabic/meta-swupdate
+   GIT: https://github.com/sbabic/meta-swupdate.git
